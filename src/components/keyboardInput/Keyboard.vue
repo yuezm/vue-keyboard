@@ -3,6 +3,7 @@
     <ul>
       <li class="keyboard-list"
           v-for="i in keyboardLength"
+          :key="i"
           @click.stop="add(i)">
         {{i}}
       </li>
@@ -21,13 +22,11 @@ export default {
     show: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   watch: {
     show(nowV) {
-      if (nowV) {
-        this.defaultDom.style.transform = 'translateY(0)';
-      }
+      this.defaultDom.style.transform = nowV ? 'translateY(0)' : 'translateY(40vh)';
     },
   },
   data() {
@@ -46,8 +45,12 @@ export default {
   },
   mounted() {
     this.defaultDom = document.querySelector('#y-keyboard-container');
+    // 初始化执行一次,不能在watch执行，因为那时还未赋值defaultDom
+    if (this.show) {
+      this.defaultDom.style.transform = 'translateY(0)';
+    }
+    // 监听点击事件，点击别处关闭键盘
     document.addEventListener('click', () => {
-      this.defaultDom.style.transform = 'translateY(40vh)';
       this.$emit('close');
     }, false);
   },

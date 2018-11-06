@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue-preview</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="../dist/build.js "></script>
+</head>
+<body>
+<div id="app">
+  <keyboard-input :length="4" @finish="finish"></keyboard-input>
+</div>
+<script>
+new Vue({
+  el: '#app',
+  methods: {
+    finish(v) {
+      console.log(v);
+    }
+  }
+});
+</script>
+</body>
+</html>

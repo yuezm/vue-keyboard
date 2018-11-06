@@ -1,8 +1,15 @@
-import Vue from 'vue'
-import Keyboard from './KeyboardInput.vue'
 import './assets/style/index.less';
+import keyboardInput from './components/KeyboardInput.vue';
 
-new Vue({
-  el: '#app',
-  render: h => h(Keyboard)
-});
+
+const keyboardComponent = {
+  install(Vue) {
+    Vue.component('keyboardInput', keyboardInput);
+  },
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(keyboardComponent);
+}
+
+export default keyboardComponent;
