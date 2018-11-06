@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import App from './App.vue'
-
-Vue.config.productionTip = false
+import Keyboard from './KeyboardInput.vue'
+import './assets/style/index.less';
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  el: '#app',
+  render: h => h(Keyboard)
+});
