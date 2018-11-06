@@ -2,6 +2,7 @@
   "name": "vue-keyboard",
   "description": "A Vue.js project",
   "version": "1.0.0",
+  "main": "src/main.js",
   "author": "zhiming.yue <zhiming.yue@nx-engine.com>",
   "license": "MIT",
   "private": true,
