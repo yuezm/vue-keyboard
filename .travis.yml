@@ -4,6 +4,20 @@ node_js:
   - '8'
 install:
   - npm i npminstall && npminstall
-script:
-  - npm run lint
-  - npm run build
+
+stages:
+  - build
+  - publish
+    if branch = master
+
+jobs:
+  include:
+    - stage:build
+    script:
+      npm run lint
+      npm run build
+
+    - stage:publish
+    script:
+      npm publish
+
