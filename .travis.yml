@@ -9,8 +9,6 @@ install:
 
 stages:
   - build
-  - name: deploy
-    if: branch = master
 
 jobs:
   include:
@@ -21,7 +19,7 @@ jobs:
 
       deploy:
         on:
-          branch = production
+          branch = master
         provider: npm
         email: "627230819@qq.com"
         api_key: $API_KEY
