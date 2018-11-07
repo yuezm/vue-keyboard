@@ -1,11 +1,10 @@
 {
-  "name": "vue-keyboard",
+  "name": "vue-mobile-keyboard",
   "description": "A Vue.js project",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/main.js",
   "author": "zhiming.yue <zhiming.yue@nx-engine.com>",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./src --fix",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",

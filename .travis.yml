@@ -9,7 +9,7 @@ install:
 
 stages:
   - build
-  - name: publish
+  - name: deploy
     if: branch = master
 
 jobs:
@@ -19,8 +19,11 @@ jobs:
         npm run lint
         npm run build
 
-    - stage: publish
-      script:
-        npm publish
+      deploy:
+        on:
+          branch = production
+        provider: npm
+        email: "627230819@qq.com"
+        api_key: $API_KEY
 
 
