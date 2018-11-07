@@ -60,7 +60,9 @@ export default {
 <style scoped lang="less">
   .keyboard-container {
     position: fixed;
+    z-index: 99;
     bottom: 0;
+    left: 0;
     padding: 2vw 0 0 2vw;
     background-color: #d1d4db;
     transition: 0.3s all;

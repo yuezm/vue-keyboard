@@ -75,3 +75,12 @@ export default {
   },
 };
 </script>
+<style lang="less">
+  .keyboard-input {
+    position: fixed;
+    width: 100vw;
+    top: 50%;
+    margin-top: -6vw;
+    padding: 0 40px;
+  }
+</style>

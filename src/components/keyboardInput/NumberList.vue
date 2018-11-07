@@ -34,7 +34,7 @@ export default {
   },
   filters: {
     makeSecret(value, sec) {
-      return value && sec ? '*' : value;
+      return (value || value === 0) && sec ? '*' : value;
     },
   },
 };
@@ -58,7 +58,7 @@ export default {
     width: 12vw;
     background-color: transparent;
     line-height: 12vw;
-    border: 1px solid #d1d4db;
+    border: 1px solid #BFBFBF;
     border-radius: 8px;
     font-size: 6vw;
     text-align: center;

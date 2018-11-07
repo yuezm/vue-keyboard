@@ -8,7 +8,6 @@ install:
 stages:
   - build
   - publish
-    if branch = master
 
 jobs:
   include:
@@ -20,4 +19,5 @@ jobs:
     - stage:publish
     script:
       npm publish
+    if: branch = master
 
