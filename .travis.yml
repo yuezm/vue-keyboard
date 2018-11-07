@@ -1,23 +1,23 @@
 sudo: false
 language: node_js
 node_js:
-  - '8'
+  - "8"
 install:
   - npm i npminstall && npminstall
 
 stages:
   - build
-  - publish
+  - name: publish
+    if: branch = master
 
 jobs:
   include:
-    - stage:build
+    - stage: build
     script:
       npm run lint
       npm run build
 
-    - stage:publish
+    - stage: publish
     script:
       npm publish
-    if: branch = master
 
