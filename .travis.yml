@@ -2,12 +2,15 @@ sudo: false
 language: node_js
 node_js:
   - "8"
+cache: npm
+
 install:
   - npm i npminstall && npminstall
 
 stages:
   - build
-  - publish
+  - name: publish
+    if: branch = master
 
 jobs:
   include:
@@ -19,4 +22,5 @@ jobs:
     - stage: publish
       script:
         npm publish
+
 
