@@ -7,8 +7,7 @@ install:
 
 stages:
   - build
-  - name: publish
-    if: branch = master
+  - publish
 
 jobs:
   include:
