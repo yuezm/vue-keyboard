@@ -25,7 +25,6 @@ jobs:
         provider: npm
         email: "627230819@qq.com"
         api_key: $API_KEY
-        skip_cleanup: true
         on:
-          branch = master
+          branch: production
 
