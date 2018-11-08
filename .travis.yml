@@ -9,7 +9,7 @@ install:
 
 stages:
   - build
-  - deploy
+  - name: deploy
 
 jobs:
   include:
@@ -20,11 +20,10 @@ jobs:
     - stage: deploy
       script:
         - echo "NPM Deploying Started ..."
-
       deploy:
         provider: npm
         email: "627230819@qq.com"
-        api_key: $API_KEY
+        api_key: "$API_KEY"
         on:
-          branch: production
+          all_branches: true
 
