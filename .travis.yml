@@ -9,6 +9,7 @@ install:
 
 stages:
   - build
+  - deploy
 
 jobs:
   include:
@@ -16,12 +17,15 @@ jobs:
       script:
         npm run lint
         npm run build
+    - stage: deploy
+      script:
+        - echo "NPM Deploying Started ..."
 
-    deploy:
-      on:
-        branch = master
-      provider: npm
-      email: "627230819@qq.com"
-      api_key: $API_KEY
-
+      deploy:
+        provider: npm
+        email: "627230819@qq.com"
+        api_key: $API_KEY
+        skip_cleanup: true
+        on:
+          branch = master
 
