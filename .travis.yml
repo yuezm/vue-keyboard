@@ -1,28 +1,28 @@
 sudo: false
 language: node_js
 node_js:
-- "8"
+  - "8"
 cache: npm
 
 install:
-- npm i
+  - npm install
 
 stages:
-- build
-- name: deploy
+  - build
+  - name: deploy
 
 jobs:
   include:
-  - stage: build
-    script:
-      npm run lint
-      npm run build
-  - stage: deploy
-    script: echo "start publish..."
-    deploy:
-      provider: npm
-      email: "627230819@qq.com"
-      api_key: "$API_KEY"
-      on:
-        all_branches: true
+    - stage: build
+      script:
+        npm run lint
+        npm run build
+    - stage: deploy
+      script: echo "start publish..."
+      deploy:
+        provider: npm
+        email: "627230819@qq.com"
+        api_key: "$API_KEY"
+        on:
+          all_branches: true
 
