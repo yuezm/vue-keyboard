@@ -4,9 +4,6 @@ node_js:
   - "8"
 cache: npm
 
-install:
-  - npm install
-
 stages:
   - build
   - name: deploy
@@ -15,6 +12,7 @@ jobs:
   include:
     - stage: build
       script:
+        npm install
         npm run lint
         npm run build
     - stage: deploy
