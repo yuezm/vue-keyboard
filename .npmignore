@@ -1,5 +1,6 @@
 .idea/
-/test
+test/
+.babelrc
 .eslintignore
 .eslintrc.js
 .gitignore
@@ -7,3 +8,4 @@
 .npmignore
 node_modules
 dist/build.js.map
+webpack.config

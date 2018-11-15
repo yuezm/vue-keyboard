@@ -16,4 +16,8 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(keyboardComponent);
 }
 
-export default keyboardComponent;
+export default {
+  keyboardInput,
+  Keyboard,
+  NumberList,
+};

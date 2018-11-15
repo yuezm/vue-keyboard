@@ -18,8 +18,7 @@ jobs:
         npm run lint
         npm run build
     - stage: deploy
-      script:
-        - echo "NPM Deploying Started ..."
+      script: echo "start publish..."
       deploy:
         provider: npm
         email: "627230819@qq.com"

@@ -1,15 +1,12 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>vue-keyboard</title>
   <style>
-    body {
-      /*background: #101010;*/
-    }
-
     .keyboard-input {
       background: #fff;
     }
@@ -17,19 +14,21 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="../dist/build.js "></script>
 </head>
+
 <body>
-<div id="app">
-  <keyboard-input :length="4" @finish="finish"></keyboard-input>
-</div>
-<script>
-new Vue({
-  el: '#app',
-  methods: {
-    finish(v) {
-      alert('输入完毕，输入为:' + v);
-    }
-  }
-});
-</script>
+  <div id="app">
+    <keyboard-input :length="6" @finish="finish"></keyboard-input>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      methods: {
+        finish(v) {
+          alert('输入完毕，输入为:' + v);
+        }
+      }
+    });
+  </script>
 </body>
+
 </html>

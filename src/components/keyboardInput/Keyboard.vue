@@ -1,5 +1,5 @@
 <template>
-  <div class="keyboard-container" id="y-keyboard-container">
+  <div class="keyboard-container" id="d-keyboard-container">
     <ul>
       <li class="keyboard-list"
           v-for="i in keyboardLength"
@@ -44,7 +44,7 @@ export default {
     },
   },
   mounted() {
-    this.defaultDom = document.querySelector('#y-keyboard-container');
+    this.defaultDom = document.querySelector('#d-keyboard-container');
     // 初始化执行一次,不能在watch执行，因为那时还未赋值defaultDom
     if (this.show) {
       this.defaultDom.style.transform = 'translateY(0)';

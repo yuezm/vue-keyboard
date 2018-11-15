@@ -1,9 +1,15 @@
 {
   "name": "vue-mobile-keyboard",
   "description": "A Vue.js project",
-  "version": "1.0.1",
+  "keywords": [
+    "vue",
+    "vue-keyboard",
+    "keyboard",
+    "keyboard-input"
+  ],
+  "version": "1.0.2",
   "main": "src/main.js",
-  "author": "zhiming.yue <zhiming.yue@nx-engine.com>",
+  "author": "zhiming.yue",
   "license": "MIT",
   "scripts": {
     "lint": "eslint --ext .js,.vue ./src --fix",
@@ -11,7 +17,6 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.5.11"
   },
   "browserslist": [
     "> 1%",
@@ -32,6 +37,7 @@
     "file-loader": "^1.1.4",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "vue": "^2.5.11",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
