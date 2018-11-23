@@ -17,11 +17,16 @@
 
 <body>
   <div id="app">
-    <keyboard-input :length="6" @finish="finish"></keyboard-input>
+    <number-list :secret="false" :length="4" v-model="value"></number-list>
   </div>
   <script>
     new Vue({
       el: '#app',
+      data() {
+        return {
+          value: '',
+        };
+      },
       methods: {
         finish(v) {
           alert('输入完毕，输入为:' + v);
