@@ -7,13 +7,13 @@
     "keyboard",
     "keyboard-input"
   ],
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "src/main.js",
   "author": "zhiming.yue",
   "license": "MIT",
   "scripts": {
     "lint": "eslint --ext .js,.vue ./src --fix",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --port=8001 --host=172.20.10.4 --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --port=8001 --host=192.168.0.108 --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {},

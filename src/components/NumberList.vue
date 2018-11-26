@@ -1,22 +1,25 @@
 <template>
-  <div class="ne-number-container" @click.stop="$emit('focus')">
-   <div class="ne-number">
-      <!-- 密码输入框 -->
+  <div class="keyboard-number-container">
+    <!-- 密码输入框 -->
     <ul>
-      <li v-for="item in length" :key="item" type="number" :class="`ne-input-number ${(item===inputData.length+1)&&focus?'active':''}` ">
+      <li v-for="item in length" :key="item" :class="`keyboard-list ${(item===inputData.length+1)&&focus?'active':''}` ">
         {{inputData[item-1]|makeSecret(secret)}}
       </li>
     </ul>
-   <label>
-      <input v-focus="autoFocus" :value="inputData" :type="type" @input="keyboardInput" class="ne-input" @focus="focus=true" @blur="focus=false">
-   </label>
-   </div>
+    <label><input v-focus="initFocus"
+                  :autofocus="initFocus"
+                  :value="inputData"
+                  :type="type"
+                  @input="keyboardInput"
+                  @focus="focus=true"
+                  @blur="focus=false"/>
+    </label>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'number-list',
+  name: 'keyboard-number',
   props: {
     // 输入框个数
     length: {
@@ -26,38 +29,37 @@ export default {
     },
     type: {
       type: String,
+      required: false,
       default: 'text',
     },
-    autoFocus: {
-      //  是否自动获取焦点
+    //  是否自动获取焦点
+    initFocus: {
       type: Boolean,
+      required: false,
       default: true,
     },
     value: {
-      // 外部传入值
       type: String,
-      required: true,
+      required: false,
+      default: '',
     },
+    // 是否加密显示
     secret: {
-      // 是否加密显示
       type: Boolean,
       required: false,
       default: false,
+    },
+    rule: {
+      type: RegExp,
+      required: false,
+      default: null,
     },
   },
   data() {
     return {
       inputData: '',
-      focus: false,
+      focus: true,
     };
-  },
-  watch: {
-    value: {
-      handler(v) {
-        this.inputData = v;
-      },
-      immediate: true,
-    },
   },
   filters: {
     makeSecret(value, sec) {
@@ -66,27 +68,48 @@ export default {
   },
   directives: {
     focus: {
-      inserted(e, boundary) {
-        if (boundary.value) {
-          e.focus();
+      inserted(el, b) {
+        if (b.value) {
+          el.focus();
         }
       },
     },
   },
   methods: {
     keyboardInput(e) {
-      const v = e.target.value.slice(0, this.length);
-      this.$emit('input', v);
-      if (v.length >= this.length) {
-        e.target.blur();
+      const _v = e.target.value.substring(0, this.length);
+      const _oldV = this.inputData;
+      // 输入规则检测
+      if (this.rule && _v !== '' && !this.rule.test(_v.slice(-1))) {
+        e.target.value = _oldV;
+        return;
+      }
+
+      // 输入超出检测
+      if (_v === _oldV && _v.length >= this.length) {
+        e.target.value = _v;
+        return;
+      }
+      this.inputData = _v;
+      this.$emit('input', _v);
+
+      // 结束输入检测
+      if (_v.length >= this.length) {
+        this.$emit('finish', _v);
       }
     },
+  },
+  updated() {
+    this.inputData = this.value;
+  },
+  created() {
+    this.inputData = this.value;
   },
 };
 </script>
 
 <style scoped lang="less">
-  .ne-number {
+  .keyboard-number-container {
     position: relative;
     & > ul {
       display: flex;
@@ -100,47 +123,36 @@ export default {
       height: 100%;
       left: 0;
       top: 0;
-      opacity: 0;
-      border: none;
-      background: transparent;
+      opacity: 0 !important;
       & input {
-        width: 0;
-        height: 0;
-        border: none;
-        background: transparent;
-        color: transparent;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
       }
     }
   }
 
-  .ne-input-number {
-    position: relative;
-    padding: 0;
+  .keyboard-list {
+    content: '';
     box-sizing: border-box;
     height: 12vw;
     width: 12vw;
     background-color: transparent;
     line-height: 12vw;
-    border: 1px solid #BFBFBF;
+    border: 1px solid #3E3E3E;
     border-radius: 8px;
     font-size: 6vw;
     text-align: center;
+    color: #000;
     &.active {
+      content: '';
       border: 2px solid #ffba00;
-      &:after {
-        position: absolute;
-        top: 50%;
-        margin: -12px 0 0 -5px;
-        font-size: 24px;
-        height: 24px;
-        width: 10px;
-        line-height: 24px;
-        text-align: center;
-        content: '|';
-        color: #666;
-        font-family: PingFangSC-Regular;
-        font-weight: 400;
-        animation: shining 1s linear infinite;
+      &:before {
+        content: '丨';
+        line-height: 1vw;
+        color: #777;
+        animation: shining 1s linear infinite normal;
       }
     }
   }
