@@ -1,11 +1,11 @@
 .idea/
 test/
+dist/build.js.map
 .babelrc
 .eslintignore
 .eslintrc.js
 .gitignore
-.gitlab-ci.yml
 .npmignore
-node_modules
-dist/build.js.map
-webpack.config
+.travis.yml
+package-lock.json
+webpack.config.js

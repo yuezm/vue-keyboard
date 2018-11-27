@@ -4,68 +4,65 @@
 
 > 在vue单页面中使用
 
-直接调用已经组合好了的键盘和数字框
+##### 全局导入
 ```
-import {keyboardInput} from 'vue-mobile-keyboard';
+// main.js
+
+import mobileInput from "vue-mobile-keyboard";
+
+Vue.use(mobileInput);
+
 // demo.vue
+
 <template>
-  <keyboardInput/>
-</template>
-```
-也可以自己组合键盘和数字框
-```
-// demo.vue
-import {Keyboard,NumberList} from 'vue-mobile-keyboard';
-<template>
-  <div>
-    <!--显示框-->
-    <NumberList :secret="secret" @focus="show=true" :length="length" :value="value"/>
-    <!--键盘-->
-    <Keyboard @add="add" @del="del" :show="show" @close="show=false;$emit('close')"/>
-   </div>
+  <NumberList v-model="data"/>
 </template>
 
-...
+export default {
   data() {
     return {
-      // 输入框控制键盘是否弹出
-      show: false,
-      value: [],
-      length: 4,
-      secret: false,
-    };
-  },
-  methods: {
-    add(v) {
-      if (this.value.length >= this.length) {
-        return;
-      }
-      this.value.push(v);
-      const _v = this.value.join('');
-      // 绑定v-model的事件
-      this.$emit('input', _v);
-      // 发送完成事件
-      if (_v.length >= this.length) this.$emit('finish', _v);
-    },
-    del() {
-      this.value.pop();
-      // 绑定v-model的事件
-      this.$emit('input', this.value.join(''));
-    },
+      data: '',
+    }
   }
-...
+}
 ```
+##### 按需加载
+```
+// demo.vue
 
+<template>
+  <NumberList v-model="data"/>
+</template>
+
+<script>
+import { NumberList } from "vue-mobile-keyboard";
+
+export default {
+  name: 'app',
+  components: {
+    NumberList,
+  },
+  data() {
+    return {
+      data: '',
+    }
+  }
+}
+```
 > 在非vue单页面中使用
 ```
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="[vue-mobile-keyboard.path]/dist/build.js "></script>
   ...
   <div id="app">
-    <keyboard-input :length="6" @finish="finish"></keyboard-input>
+    <number-list v-model="data" :length="6" @finish="finish"></number-list>
   </div>
     <script>
       new Vue({
         el: '#app',
+        data:{
+          data: '',
+        },
         methods: {
           finish(v) {
             alert('输入完毕，输入为:' + v);
@@ -76,4 +73,17 @@ import {Keyboard,NumberList} from 'vue-mobile-keyboard';
   ...
 ```
 
-### 调用时的参数
+### 组件参数
+|参数|类型|是否必传|说明|
+|--|--|--|--|
+|length|Number|false|输入框的个数,最小为1,最大为8,默认6|
+|type|String|false|输入框类型, enum[ 'text', 'number', 'tel' ],默认text|
+|initFocus|Boolean|false|是否自动获取焦点(在IOS无法使用),默认false|
+|value|String|false|父组件传给子组件的值,父组件使用v-model时,会自动传入该值|
+|secret|Boolean|false|是否加密显示,默认false|
+|rule|String|false|输入框输入值的校验,enum[ 'number', 'string' ],默认string|
+
+### 组件事件
+|时间名称|回调参数|说明|
+|--|--|--|
+|finish|v:用户输入的值|当用户完成输入触发|

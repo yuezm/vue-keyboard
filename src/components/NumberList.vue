@@ -19,18 +19,24 @@
 
 <script>
 export default {
-  name: 'keyboard-number',
+  name: 'number-list',
   props: {
     // 输入框个数
     length: {
       type: Number,
       required: false,
       default: 6,
+      validator(v) {
+        return v >= 1 && v <= 8;
+      },
     },
     type: {
       type: String,
       required: false,
       default: 'text',
+      validator(v) {
+        return [ 'text', 'number', 'tel' ].includes(v);
+      },
     },
     //  是否自动获取焦点
     initFocus: {
@@ -50,9 +56,12 @@ export default {
       default: false,
     },
     rule: {
-      type: RegExp,
+      type: String,
       required: false,
-      default: null,
+      default: 'string',
+      validator(v) {
+        return [ 'number', 'string' ].includes(v);
+      },
     },
   },
   data() {
@@ -80,7 +89,7 @@ export default {
       const _v = e.target.value.substring(0, this.length);
       const _oldV = this.inputData;
       // 输入规则检测
-      if (this.rule && _v !== '' && !this.rule.test(_v.slice(-1))) {
+      if (this.rule && _v !== '' && typeof _v.slice(-1) !== this.rule) {
         e.target.value = _oldV;
         return;
       }
