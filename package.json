@@ -15,8 +15,7 @@
     "lint": "eslint --ext .js,.vue ./src --fix",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --port=8001 --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "postinstall": "snyk test",
-    "prebuild": "snyk test"
+    "prebuild": "snyk auth&&snyk test"
   },
   "dependencies": {},
   "browserslist": [
