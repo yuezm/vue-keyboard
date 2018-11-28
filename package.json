@@ -7,7 +7,7 @@
     "keyboard",
     "keyboard-input"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "dist/build.js",
   "author": "zhiming.yue",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "lint": "eslint --ext .js,.vue ./src --fix",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --port=8001 --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "prebuild": "snyk auth&&snyk test"
+    "prebuild": "snyk test"
   },
   "dependencies": {},
   "browserslist": [

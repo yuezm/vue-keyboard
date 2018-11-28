@@ -120,6 +120,16 @@ export default {
 </script>
 
 <style scoped lang="less">
+  div, ul, li, input, label {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  li {
+    list-style: none;
+  }
+
   .keyboard-number-container {
     position: relative;
     & > ul {
@@ -135,12 +145,17 @@ export default {
       left: 0;
       top: 0;
       opacity: 0 !important;
+      border: none;
+      background: transparent;
       & input {
-        margin: 0 !important;
+        width: 100%;
+        height: 100%;
+        background: transparent !important;
         padding: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
         border: none !important;
+        color: transparent !important;
+        text-indent: 200vw;
+        margin-left: -200vw;
       }
     }
   }

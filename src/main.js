@@ -1,4 +1,3 @@
-import './assets/style/index.less';
 import NumberList from './components/NumberList';
 
 const mobileKeyboard = {
