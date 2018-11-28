@@ -14,7 +14,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue ./src --fix",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --port=8001 --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "postinstall": "snyk test",
+    "prebuild": "snyk test"
   },
   "dependencies": {},
   "browserslist": [
@@ -40,6 +42,7 @@
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^2.9.1",
+    "snyk": "^1.110.2"
   }
 }

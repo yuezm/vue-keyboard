@@ -2,7 +2,9 @@
   <div class="keyboard-number-container">
     <!-- 密码输入框 -->
     <ul>
-      <li v-for="item in length" :key="item" :class="`keyboard-list ${(item===inputData.length+1)&&focus?'active':''}` ">
+      <li v-for="item in length"
+          :key="item"
+          :class="`keyboard-list ${(item===inputData.length+1)&&focus?'active':''}` ">
         {{inputData[item-1]|makeSecret(secret)}}
       </li>
     </ul>
@@ -138,6 +140,7 @@ export default {
         padding: 0 !important;
         width: 0 !important;
         height: 0 !important;
+        border: none !important;
       }
     }
   }
@@ -156,7 +159,7 @@ export default {
     color: #000;
     &.active {
       content: '';
-      border: 2px solid #ffba00;
+      border: 1px solid #ffba00;
       &:before {
         content: '丨';
         line-height: 1vw;
