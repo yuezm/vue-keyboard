@@ -162,7 +162,6 @@ export default {
 
   .keyboard-list {
     content: '';
-    box-sizing: border-box;
     height: 12vw;
     width: 12vw;
     background-color: transparent;
