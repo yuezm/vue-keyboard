@@ -58,12 +58,9 @@ export default {
       default: false,
     },
     rule: {
-      type: String,
+      type: RegExp,
       required: false,
-      default: 'string',
-      validator(v) {
-        return [ 'number', 'string' ].includes(v);
-      },
+      default: null,
     },
   },
   data() {
@@ -91,7 +88,7 @@ export default {
       const _v = e.target.value.substring(0, this.length);
       const _oldV = this.inputData;
       // 输入规则检测
-      if (this.rule && _v !== '' && typeof _v.slice(-1) !== this.rule) {
+      if (this.rule && _v !== '' && !this.rule.test(_v.slice(-1))) {
         e.target.value = _oldV;
         return;
       }
