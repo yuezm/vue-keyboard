@@ -81,7 +81,7 @@ export default {
 |initFocus|Boolean|false|是否自动获取焦点(在IOS无法使用),默认false|
 |value|String|false|父组件传给子组件的值,父组件使用v-model时,会自动传入该值|
 |secret|Boolean|false|是否加密显示,默认false|
-|rule|String|false|输入框输入值的校验,enum[ 'number', 'string' ],默认string|
+|rule|RegExp|false|输入框输入值的校验|
 
 ### 组件事件
 |时间名称|回调参数|说明|

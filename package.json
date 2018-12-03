@@ -1,13 +1,13 @@
 {
   "name": "vue-mobile-keyboard",
-  "description": "A Vue.js project",
+  "description": "A Vue mobile continuous input component",
   "keywords": [
     "vue",
     "vue-keyboard",
     "keyboard",
     "keyboard-input"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "dist/build.js",
   "author": "zhiming.yue",
   "license": "MIT",

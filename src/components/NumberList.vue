@@ -4,13 +4,14 @@
     <ul>
       <li v-for="item in length"
           :key="item"
-          :class="`keyboard-list ${(item===inputData.length+1)&&focus?'active':''}` ">
-        {{inputData[item-1]|makeSecret(secret)}}
+          :class="`keyboard-list ${(item===value.length+1)&&focus?'active':''}` ">
+        {{value[item-1]|makeSecret(secret)}}
       </li>
     </ul>
-    <label><input v-focus="initFocus"
+    <label>
+      <input v-focus="initFocus"
                   :autofocus="initFocus"
-                  :value="inputData"
+                  :value="value"
                   :type="type"
                   @input="keyboardInput"
                   @focus="focus=true"
@@ -21,7 +22,7 @@
 
 <script>
 export default {
-  name: 'number-list',
+  name: 'vue-number-list',
   props: {
     // 输入框个数
     length: {
@@ -57,6 +58,7 @@ export default {
       required: false,
       default: false,
     },
+    // 输入规则
     rule: {
       type: RegExp,
       required: false,
@@ -65,8 +67,7 @@ export default {
   },
   data() {
     return {
-      inputData: '',
-      focus: true,
+      focus: false,
     };
   },
   filters: {
@@ -86,7 +87,15 @@ export default {
   methods: {
     keyboardInput(e) {
       const _v = e.target.value.substring(0, this.length);
-      const _oldV = this.inputData;
+      const _oldV = this.value;
+
+      // 在数字输入框 连续输入. 的错误检测
+      if (_v === '') {
+        e.target.value = _v;
+        this.$emit('input', _v);
+        return;
+      }
+
       // 输入规则检测
       if (this.rule && _v !== '' && !this.rule.test(_v.slice(-1))) {
         e.target.value = _oldV;
@@ -98,20 +107,13 @@ export default {
         e.target.value = _v;
         return;
       }
-      this.inputData = _v;
-      this.$emit('input', _v);
 
+      this.$emit('input', _v);
       // 结束输入检测
       if (_v.length >= this.length) {
         this.$emit('finish', _v);
       }
     },
-  },
-  updated() {
-    this.inputData = this.value;
-  },
-  created() {
-    this.inputData = this.value;
   },
 };
 </script>
