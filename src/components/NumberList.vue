@@ -10,12 +10,12 @@
     </ul>
     <label>
       <input v-focus="initFocus"
-                  :autofocus="initFocus"
-                  :value="value"
-                  :type="type"
-                  @input="keyboardInput"
-                  @focus="focus=true"
-                  @blur="focus=false"/>
+             :autofocus="initFocus"
+             :value="value"
+             :type="type"
+             @input="keyboardInput"
+             @focus="focus=true"
+             @blur="focus=false"/>
     </label>
   </div>
 </template>
@@ -111,6 +111,7 @@ export default {
       this.$emit('input', _v);
       // 结束输入检测
       if (_v.length >= this.length) {
+        e.target.blur();
         this.$emit('finish', _v);
       }
     },
