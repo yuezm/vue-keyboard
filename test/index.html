@@ -16,10 +16,11 @@
 </head>
 
 <body>
-  <div id="app">
-    <number-list type="number" :length="4" v-model="v" @finish="finish"></number-list>
-  </div>
-  <script>
+<div id="app">
+  <number-list type="text" :length="4" v-model="v" @finish="finish"
+               :entire-rule="/$\d*/"></number-list>
+</div>
+<script>
     new Vue({
       el: '#app',
       data() {
@@ -29,7 +30,8 @@
       },
       methods: {
         finish(v) {
-          alert('输入完毕，输入为:' + v);
+          // alert('输入完毕，输入为:' + v);
+          console.log(v);
         }
       }
     });

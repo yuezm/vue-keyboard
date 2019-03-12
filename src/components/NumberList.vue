@@ -5,15 +5,17 @@
       <li v-for="item in length"
           :key="item"
           :class="`keyboard-list ${(item===value.length+1)&&focus?'active':''}` ">
-        {{value[item-1]|makeSecret(secret)}}
+        {{value[item-1]|makeSecret(isSecret)}}
       </li>
     </ul>
     <label>
-      <input v-focus="initFocus"
-             :autofocus="initFocus"
+      <input v-focus="isInitFocus"
+             :autofocus="isInitFocus"
              :value="value"
              :type="type"
-             @input="keyboardInput"
+             @input="emitEventInput"
+             @compositionstart="emitEventCS"
+             @compositionend="emitEventCE"
              @focus="focus=true"
              @blur="focus=false"/>
     </label>
@@ -42,7 +44,7 @@ export default {
       },
     },
     //  是否自动获取焦点
-    initFocus: {
+    isInitFocus: {
       type: Boolean,
       required: false,
       default: true,
@@ -53,13 +55,19 @@ export default {
       default: '',
     },
     // 是否加密显示
-    secret: {
+    isSecret: {
       type: Boolean,
       required: false,
       default: false,
     },
-    // 输入规则
+    // 单个输入规则
     rule: {
+      type: RegExp,
+      required: false,
+      default: null,
+    },
+    // 整个输入框输入规则
+    entireRule: {
       type: RegExp,
       required: false,
       default: null,
@@ -68,15 +76,18 @@ export default {
   data() {
     return {
       focus: false,
+      isInputChinese: false,
     };
   },
   filters: {
-    makeSecret(value, sec) {
-      return (value || value === 0) && sec ? '*' : value;
+    // 是否加密显示
+    makeSecret(value, isSecret) {
+      return (value || value === 0) && isSecret ? '*' : value;
     },
   },
   directives: {
     focus: {
+      // 在IOS端，该方法无效
       inserted(el, b) {
         if (b.value) {
           el.focus();
@@ -85,7 +96,10 @@ export default {
     },
   },
   methods: {
-    keyboardInput(e) {
+    emitEventInput(e) {
+      if (this.isInputChinese) {
+        return;
+      }
       const _v = e.target.value.substring(0, this.length);
       const _oldV = this.value;
 
@@ -96,8 +110,14 @@ export default {
         return;
       }
 
-      // 输入规则检测
+      // 单个输入规则检测
       if (this.rule && _v !== '' && !this.rule.test(_v.slice(-1))) {
+        e.target.value = _oldV;
+        return;
+      }
+
+      // 整个输入规则检测
+      if (this.entireRule && _v !== '' && !this.entireRule.test(_v)) {
         e.target.value = _oldV;
         return;
       }
@@ -109,11 +129,21 @@ export default {
       }
 
       this.$emit('input', _v);
+
       // 结束输入检测
       if (_v.length >= this.length) {
         e.target.blur();
         this.$emit('finish', _v);
       }
+    },
+
+    emitEventCS() {
+      this.isInputChinese = true;
+    },
+
+    emitEventCE(e) {
+      this.isInputChinese = false;
+      this.emitEventInput(e);
     },
   },
 };
