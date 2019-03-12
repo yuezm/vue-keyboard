@@ -1,5 +1,15 @@
 # vue-keyboard
 
+### 兼容性
+
+Vue 2.0+
+
+IOS Safari: 6+
+Android Browser: 4+
+Chrome for Android: 71
+Firefox for Android: 64
+UC Browser for Android: 11.8
+
 ### 如何使用
 
 > 在vue单页面中使用
@@ -78,10 +88,11 @@ export default {
 |--|--|--|--|
 |length|Number|false|输入框的个数,最小为1,最大为8,默认6|
 |type|String|false|输入框类型, enum[ 'text', 'number', 'tel' ],默认text|
-|initFocus|Boolean|false|是否自动获取焦点(在IOS无法使用),默认false|
+|isInitFocus|Boolean|false|是否自动获取焦点(在IOS无法使用),默认false|
 |value|String|false|父组件传给子组件的值,父组件使用v-model时,会自动传入该值|
-|secret|Boolean|false|是否加密显示,默认false|
+|isSecret|Boolean|false|是否加密显示,默认false|
 |rule|RegExp|false|输入框输入值的校验|
+|entireRule|RegExp|false|输入框整体校验|
 
 ### 组件事件
 |时间名称|回调参数|说明|
