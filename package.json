@@ -7,7 +7,7 @@
     "keyboard",
     "keyboard-input"
   ],
-  "version": "1.2.6",
+  "version": "1.2.7",
   "main": "dist/build.js",
   "author": "zhiming.yue",
   "license": "MIT",
