@@ -1,6 +1,8 @@
 # vue-keyboard
 vue版的移动端,连续数字输入框
 
+[DEMO](http://47.98.176.169/vue-keyboard/test/)
+
 ![avatar](https://img-blog.csdnimg.cn/20190315233250319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2NjEzMDcz,size_16,color_FFFFFF,t_70)
 
 ### 兼容性
