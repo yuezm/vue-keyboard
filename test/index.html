@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="zh-cn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +16,7 @@
 
 <body>
 <div id="app">
-  <number-list type="text" :length="4" v-model="v" @finish="finish"
-               :entire-rule="/$\d*/"></number-list>
+  <number-list type="text" :length="4" v-model="v" @finish="finish"></number-list>
 </div>
 <script>
     new Vue({
@@ -30,8 +28,7 @@
       },
       methods: {
         finish(v) {
-          // alert('输入完毕，输入为:' + v);
-          console.log(v);
+          alert('输入完毕，输入为:' + v);
         }
       }
     });
